@@ -1,0 +1,221 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* 添加默认主题颜色变量 */
+  --background-color: #242424;
+  --text-color: rgba(255, 255, 255, 0.87);
+  --button-bg: #1a1a1a;
+  --button-hover-border: #646cff;
+  --link-color: #646cff;
+  --link-hover-color: #535bf2;
+}
+
+/* 添加浅色主题 */
+:root.light-theme {
+  --background-color: #ffffff;
+  --text-color: #213547;
+  --button-bg: #f9f9f9;
+  --button-hover-border: #747bff;
+  --link-color: #747bff;
+  --link-hover-color: #646cff;
+}
+
+/* 粉色主题 */
+:root.pink-theme {
+  --background-color: #fce4ec;
+  --text-color: #880e4f;
+  --button-bg: #f8bbd0;
+  --button-hover-border: #ec407a;
+  --link-color: #d81b60;
+  --link-hover-color: #c2185b;
+}
+
+/* 蓝色主题 */
+:root.blue-theme {
+  --background-color: #e3f2fd;
+  --text-color: #0d47a1;
+  --button-bg: #bbdefb;
+  --button-hover-border: #2196f3;
+  --link-color: #1976d2;
+  --link-hover-color: #1565c0;
+}
+
+/* 绿色主题 */
+:root.green-theme {
+  --background-color: #e8f5e9;
+  --text-color: #1b5e20;
+  --button-bg: #c8e6c9;
+  --button-hover-border: #4caf50;
+  --link-color: #388e3c;
+  --link-hover-color: #2e7d32;
+}
+
+/* 黄色主题 */
+:root.yellow-theme {
+  --background-color: #fffde7;
+  --text-color: #f57f17;
+  --button-bg: #fff9c4;
+  --button-hover-border: #ffd600;
+  --link-color: #fdd835;
+  --link-hover-color: #fbc02d;
+}
+
+/* 紫色主题 */
+:root.purple-theme {
+  --background-color: #f3e5f5;
+  --text-color: #4a148c;
+  --button-bg: #e1bee7;
+  --button-hover-border: #9c27b0;
+  --link-color: #7b1fa2;
+  --link-hover-color: #6a1b9a;
+}
+
+/* 图片背景主题 */
+:root.image-theme {
+  --background-color: transparent; /* 使背景色透明以显示图片 */
+  --text-color: #ffffff; /* 默认白色文字，确保可读性 */
+  --button-bg: rgba(255, 255, 255, 0.2); /* 半透明白色背景的按钮 */
+  --button-hover-border: rgba(255, 255, 255, 0.8);
+  --link-color: #ffffff;
+  --link-hover-color: rgba(255, 255, 255, 0.8);
+}
+
+/* 为图片主题添加特殊样式 */
+:root.image-theme body {
+  background-image: var(--bg-image, none);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+a {
+  font-weight: 500;
+  color: var(--link-color);
+  text-decoration: inherit;
+}
+a:hover {
+  color: var(--link-hover-color);
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden; /* 新增 */
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--button-bg);
+  cursor: pointer;
+  transition: border-color 0.25s;
+  color: var(--text-color);
+}
+button:hover {
+  border-color: var(--button-hover-border);
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.card {
+  padding: 2em;
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+img, video { /* 新增 */
+  max-width: 100%;
+  height: auto;
+}
+
+/* 手机端样式 */
+@media (max-width: 768px) {
+  :root {
+    font-size: 90%;
+    line-height: 1.4;
+  }
+
+  :root.image-theme body {
+    background-attachment: scroll; /* 在移动设备上使用滚动而不是固定背景 */
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  button {
+    border-radius: 6px;
+    padding: 0.8em 1.6em;
+    font-size: 0.9em;
+  }
+
+  #app {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+}
+
+/* 添加平板设备的样式 */
+@media (min-width: 769px) and (max-width: 1024px) {
+  :root.image-theme body {
+    background-size: auto 100%;
+  }
+}
+
+/* 添加横屏模式的特殊处理 */
+@media (orientation: landscape) and (max-height: 500px) {
+  :root.image-theme body {
+    background-size: auto 100vh;
+  }
+}
+
+/* 添加按钮组样式 */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
