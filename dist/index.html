@@ -4,11 +4,83 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + Vue</title>
-    <script type="module" crossorigin src="https://yydwjj.github.io/gift/dist/assets/index-MLWrUCIT.js"></script>
-    <link rel="stylesheet" crossorigin href="https://yydwjj.github.io/gift/dist/assets/index-OVz9B_IT.css">
+    <title>HJBBMuaMuaMua</title>
+    <style>
+      .emoji {
+          position: absolute;
+          font-size: 24px;
+          user-select: none;
+          pointer-events: none;
+          transition: opacity 1s ease-out; /* 添加渐隐效果 */
+      }
+    </style>
+    <script type="module" crossorigin src="/assets/index-C_Wh9_OD.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-OVz9B_IT.css">
   </head>
   <body>
     <div id="app"></div>
+    <script>
+        const emojis = ['❤️', '💙', '💚', '💛', '💜', '💗', '💝']; // 可用的emoji列表
+        const gravity = 0.35; // 减小重力值，使下落速度变慢
+        const friction = 0.8; // 碰撞时的摩擦力
+
+        document.addEventListener("click", (event) => {
+            const clickX = event.clientX;
+            const clickY = event.clientY;
+            const numEmojis = Math.floor(Math.random() * 5) + 3; // 随机生成3到7个emoji
+
+            for (let i = 0; i < numEmojis; i++) {
+                createEmoji(clickX, clickY);
+            }
+        });
+
+        function createEmoji(x, y) {
+            const emoji = document.createElement("div");
+            emoji.classList.add("emoji");
+            emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)]; // 随机选择一个emoji
+            document.body.appendChild(emoji);
+
+            let velocityX = (Math.random() - 0.5) * 6; // 初始水平速度
+            let velocityY = (Math.random() - 0.5) * 6; // 初始垂直速度
+            let bounceCount = 0; // 记录碰到底部的次数
+
+            const update = () => {
+                velocityY += gravity; // 应用重力
+                x += velocityX;
+                y += velocityY;
+
+                // 边界碰撞检测
+                if (y + emoji.offsetHeight > window.innerHeight) {
+                    y = window.innerHeight - emoji.offsetHeight;
+                    velocityY *= -friction; // 反转速度并应用摩擦力
+                    velocityX *= friction;
+                    bounceCount++; // 碰到底部次数加1
+
+                    // 碰到底部3次后触发渐隐效果
+                    if (bounceCount >= 3) {
+                        emoji.style.opacity = 0; // 设置透明度为0
+                        setTimeout(() => {
+                            document.body.removeChild(emoji); // 移除emoji
+                        }, 1000); // 等待渐隐动画完成
+                        return;
+                    }
+                }
+                if (x + emoji.offsetWidth > window.innerWidth || x < 0) {
+                    velocityX *= -1; // 水平反转
+                }
+
+                emoji.style.left = `${x}px`;
+                emoji.style.top = `${y}px`;
+
+                if (y < window.innerHeight) {
+                    requestAnimationFrame(update); // 继续更新位置
+                } else {
+                    document.body.removeChild(emoji); // 移除超出屏幕的emoji
+                }
+            };
+
+            update();
+        }
+    </script>
   </body>
 </html>
